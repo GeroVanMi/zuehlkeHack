@@ -1,12 +1,86 @@
-import React from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity, KeyboardAvoidingView, FlatList, Keyboard } from 'react-native';
+import { Picker, PickerItem } from 'react-native-woodpicker';
 
-export default function Home({navigation}) {
+const DATA = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Second Item',
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Third Item',
+    },
+  ];
+
+const Item = ({ name }) => (
+    <View style={styles.item}>
+        <Text style={styles.name}>{name}</Text>
+    </View>
+);
+export default function Home({ navigation }) {
+    const [pickedData, setPickedData] = useState();
+    
+    const data = [
+        {label: "5", value: 1}, 
+        {label: "10", value: 2}, 
+        {label: "15", value: 3}, 
+        {label: "20", value: 4}
+    ];
+
+    const [player, setPlayer] = useState();
+    const handleAddPlayer = () => {
+        Keyboard.dismiss();
+        window.playerList.addPlayer(player);
+        setPlayer(null);
+        console.log(window.playerList.players);
+    }
+    
+    const renderPlayerNameItem = ({ item }) => (
+        <Item name={item.name} />
+    );
+
     return (
         <View style={styles.container}>
             <Text>Home</Text>
-            <Button title={'Start round'} onPress={() => navigation.navigate('ActiveRound')}/>
-        </View>
+
+            <FlatList
+                data={Object.values(window.playerList.players)}
+                renderItem={renderPlayerNameItem}
+                keyExtractor={item => item.name}
+            />
+            <Text style={styles.amountLabel}>Runden:</Text>
+            <Picker
+                item={pickedData}
+                items={data}
+                onItemChange={setPickedData}
+                title="Wähle die Anzahl Runden"
+                placeholder="Wähle die Rundenanzahl"
+                isNullable
+            />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={styles.writeTaskWrapper}
+            >
+                <TextInput style={styles.input} placeholder={'Einen Spieler hinzufügen'} value={player} onChangeText={text => setPlayer(text)} />
+                <TouchableOpacity onPress={() => handleAddPlayer()}>
+                    <View style={styles.addWrapper}>
+                        <Text style={styles.addText}>+</Text>
+                    </View>
+                </TouchableOpacity>
+            </KeyboardAvoidingView>
+            <KeyboardAvoidingView style={styles.buttonWrapper}>
+                <TouchableOpacity onPress={() => navigation.navigate('ActiveRound')}>
+                    <View style={styles.startButton}>
+                        <Text style={styles.buttonText}>Start</Text>
+                    </View>
+                </TouchableOpacity>
+            </KeyboardAvoidingView>
+        </View >
     );
 }
 
@@ -17,4 +91,52 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    writeTaskWrapper: {
+        position: 'absolute',
+        bottom: 60,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    input: {
+        paddingVertical: 15,
+        paddingHorizontal: 15,
+        backgroundColor: '#fff',
+        borderRadius: 60,
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+        width: 250,
+    },
+    addWrapper: {
+        width: 60,
+        height: 60,
+        backgroundColor: '#fff',
+        borderRadius: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+    },
+    buttonWrapper: {
+        position: 'absolute',
+        bottom: 150,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    startButton: {
+        width: 150,
+        height: 50,
+        backgroundColor: '#55AAFF',
+        borderRadius: 8,
+        borderColor: '#C0C0C0',
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonText: {
+        fontSize: 20,
+    }
 });
