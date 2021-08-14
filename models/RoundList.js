@@ -11,7 +11,6 @@ export default class RoundList {
     constructor(length) {
         /** @type {Round} */
         this.rounds = {};
-        this.currentRoundCount = 0;
 
         // TODO: Increase this limit.
         if(length > 5) {
@@ -29,15 +28,26 @@ export default class RoundList {
         if(this.rounds[key] !== undefined) {
             return false;
         }
+        if(Object.values(this.rounds).length === 0) {
+            this.currentRoundIndex = key;
+        }
         this.rounds[key] = possibleRounds[key];
         return true;
     }
 
     /**
      * Increments the current round counter by one.
+     *
+     * @return Returns the next key in line or null if the last round was reached.
      */
     incrementRoundCounter() {
-        this.currentRoundCount++;
+        for(let key in Object.keys(this.rounds)) {
+            if(key > this.currentRoundIndex) {
+                this.currentRoundIndex = key;
+                return key;
+            }
+        }
+        return null;
     }
 
     /**
