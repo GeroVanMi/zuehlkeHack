@@ -36,4 +36,17 @@ export default class PlayerList {
         delete this.players[name];
         return true;
     }
+
+    /**
+     * Get player with certain name.
+     *
+     * @param name The name of the player.
+     * @returns {Player} Returns an instance of a Player with the given name.
+     *
+     * @see Player
+     */
+    getPlayer = (name) => {
+        return this.players[name];
+    }
+
 }
