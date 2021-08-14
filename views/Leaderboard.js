@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
-export default function Leaderboard() {
+export default function Leaderboard({navigation}) {
     return (
         <View style={styles.container}>
             <Text>Leaderboard!</Text>
+            <Button title={'Show leaderboard'} onPress={() => navigation.navigate('Home')}/>
         </View>
     );
 }

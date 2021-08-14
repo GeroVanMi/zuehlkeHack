@@ -1,10 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 
-export default function CompletedRound() {
+export default function CompletedRound({navigation}) {
     return (
         <View style={styles.container}>
             <Text>Round completed!</Text>
+            <Button title={'Show leaderboard'} onPress={() => navigation.navigate('Leaderboard')}/>
         </View>
     );
 }
