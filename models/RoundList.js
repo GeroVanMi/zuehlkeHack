@@ -51,6 +51,14 @@ export default class RoundList {
     }
 
     /**
+     * Returns the active round
+     * @returns {Round}
+     */
+    getActiveRound() {
+        return this.rounds[this.currentRoundIndex];
+    }
+
+    /**
      * Reads out random rounds from assets/possibleRounds.json and stores them into the rounds property.
      *
      * @param length
