@@ -17,7 +17,7 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
                 <Stack.Screen name="Home" component={Home} options={{title: 'Welcome'}} />
                 <Stack.Screen name="ActiveRound" component={ActiveRound}/>
                 <Stack.Screen name="CompletedRound" component={CompletedRound}/>

@@ -10,7 +10,7 @@ export default function ActiveRound({route, navigation}) {
 
     let {activeRoundList} = route.params;
 
-    setTimeout(function() { navigation.navigate('CompletedRound', {activeRoundList}); }, 30 * 100);
+    setTimeout(function() { navigation.navigate('CompletedRound', {activeRoundList}); }, 30 * 1000);
     
     let data = [];
     let activeLetters = activeRoundList.getActiveRound().letters
