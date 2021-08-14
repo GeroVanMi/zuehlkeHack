@@ -48,6 +48,7 @@ export default function Home({route, navigation}) {
                 data={Object.values(window.playerList.players)}
                 renderItem={renderPlayerNameItem}
                 keyExtractor={item => item.name}
+                style={styles.nameList}
             />
             <Text style={styles.amountLabel}>Runden:</Text>
             <Picker
@@ -83,9 +84,27 @@ export default function Home({route, navigation}) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#01579b',
         alignItems: 'center',
         justifyContent: 'center',
+        color: '#fff',
+    },
+    nameList: {
+        marginTop: 80,
+        borderColor: '#777',
+        borderWidth: 2,
+        borderRadius: 15,
+        minWidth: 200,
+        height: 200,
+    },
+    item:{
+        paddingTop: 20,
+        paddingLeft: 20,
+        borderBottomColor: '#777',
+        borderBottomWidth: 2,
+    },
+    name: {
+        color: '#fff',
     },
     writeTaskWrapper: {
         position: 'absolute',
