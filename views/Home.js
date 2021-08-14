@@ -1,34 +1,30 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, Button, TouchableOpacity, KeyboardAvoidingView, FlatList, Keyboard } from 'react-native';
+import RoundList from "../models/RoundList";
 import { Picker, PickerItem } from 'react-native-woodpicker';
-
-const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-  ];
 
 const Item = ({ name }) => (
     <View style={styles.item}>
         <Text style={styles.name}>{name}</Text>
     </View>
 );
-export default function Home({ navigation }) {
+
+/**
+ *
+ * @param navigation
+ * @param {RoundList} activeRoundList
+ * @constructor
+ */
+export default function Home({route, navigation}) {
+    // TODO: Get the round list from the settings.
+    let activeRoundList = route.params ? route.params.activeRoundList : new RoundList(10);
+
     const [pickedData, setPickedData] = useState();
-    
-    const data = [
-        {label: "5", value: 1}, 
-        {label: "10", value: 2}, 
-        {label: "15", value: 3}, 
+
+    const availableRoundLengths = [
+        {label: "5", value: 1},
+        {label: "10", value: 2},
+        {label: "15", value: 3},
         {label: "20", value: 4}
     ];
 
@@ -39,7 +35,7 @@ export default function Home({ navigation }) {
         setPlayer(null);
         console.log(window.playerList.players);
     }
-    
+
     const renderPlayerNameItem = ({ item }) => (
         <Item name={item.name} />
     );
@@ -56,14 +52,14 @@ export default function Home({ navigation }) {
             <Text style={styles.amountLabel}>Runden:</Text>
             <Picker
                 item={pickedData}
-                items={data}
+                items={availableRoundLengths}
                 onItemChange={setPickedData}
                 title="Wähle die Anzahl Runden"
                 placeholder="Wähle die Rundenanzahl"
                 isNullable
             />
             <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                behavior={"padding"}
                 style={styles.writeTaskWrapper}
             >
                 <TextInput style={styles.input} placeholder={'Einen Spieler hinzufügen'} value={player} onChangeText={text => setPlayer(text)} />
@@ -74,7 +70,7 @@ export default function Home({ navigation }) {
                 </TouchableOpacity>
             </KeyboardAvoidingView>
             <KeyboardAvoidingView style={styles.buttonWrapper}>
-                <TouchableOpacity onPress={() => navigation.navigate('ActiveRound')}>
+                <TouchableOpacity onPress={() => navigation.navigate('ActiveRound', {activeRoundList})}>
                     <View style={styles.startButton}>
                         <Text style={styles.buttonText}>Start</Text>
                     </View>

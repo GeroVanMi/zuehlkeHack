@@ -1,0 +1,44 @@
+[
+  {
+    "letters": "a, b, e, u",
+    "words": [
+      "abbau",
+      "aber"
+    ]
+  },
+  {
+    "letters": "a, b, z, u",
+    "words": [
+      "abbau",
+      "aber"
+    ]
+  },
+  {
+    "letters": "a, b, f, u",
+    "words": [
+      "abbau",
+      "aber"
+    ]
+  },
+  {
+    "letters": "a, b, h, u",
+    "words": [
+      "abbau",
+      "aber"
+    ]
+  },
+  {
+    "letters": "a, b, r, u",
+    "words": [
+      "abbau",
+      "aber"
+    ]
+  },
+  {
+    "letters": "a, b, ee, u",
+    "words": [
+      "abbau",
+      "aber"
+    ]
+  }
+]

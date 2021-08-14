@@ -1,11 +1,19 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
 
-export default function ActiveRound({navigation}) {
+/**
+ * @param route
+ * @param navigation
+ * @constructor
+ */
+export default function ActiveRound({route, navigation}) {
+
+    let {activeRoundList} = route.params;
+
     return (
         <View style={styles.container}>
             <Text>Round ongoing!</Text>
-            <Button title={'Stop round'} onPress={() => navigation.navigate('CompletedRound')}/>
+            <Button title={'Stop round'} onPress={() => navigation.navigate('CompletedRound', {activeRoundList})}/>
         </View>
     );
 }

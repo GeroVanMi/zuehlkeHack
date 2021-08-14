@@ -5,7 +5,7 @@ export default function Leaderboard({navigation}) {
     return (
         <View style={styles.container}>
             <Text>Leaderboard!</Text>
-            <Button title={'Show leaderboard'} onPress={() => navigation.navigate('Home')}/>
+            <Button title={'Start new Round'} onPress={() => navigation.navigate('Home')}/>
         </View>
     );
 }
